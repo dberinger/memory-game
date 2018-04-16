@@ -45,6 +45,7 @@
 
 #card-deck {
     display: flex;
+    flex-flow: wrap;
 }
 
 .matched {

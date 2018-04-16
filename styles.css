@@ -1,0 +1,56 @@
+.flip {
+    position: relative;
+    width: 200px;
+    height: 260px;
+    margin: 10px;
+
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: 1s;
+    font-size: 5em;
+}
+
+.face {
+    margin: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+.front {
+    background-color: dimgray;
+    position: absolute;
+    z-index: 1;
+}
+
+.back {
+    background-color: wheat;
+    transform: rotateY(-180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flipped {
+    transform: rotateY(-180deg);
+}
+
+#card-deck {
+    display: flex;
+}
+
+.matched {
+    pointer-events: none;
+}
+
+.open {
+    pointer-events: none;
+}

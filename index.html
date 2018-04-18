@@ -10,28 +10,29 @@
 </head>
 
 <body>
-    <h1 class="caps title">Memory game</h1>
     <div id="welcome">
         <h1>Welcome to the memory game!</h1>
         <h2>Here are the rules:</h2>
         <ul>
             <li>each round you have two clicks to reveal underlying symbols of two chosen cards</li>
-            <li>if two symbols match, the two cards stay flipped over, so remember the symbols you've discovered before</li>
-            <li>if cards don't match, they remain face down </li>
+            <li>if two symbols match, the two cards stay flipped over</li>
+            <li>if cards don't match, they'll flip facing down </li>
             <li>in order to win, all cards must be matched</li>
             <li>there is no time or click limit</li>
         </ul>
-        <h2>What's your name or nickname?</h2>
-        <input type="text" id="username-in" placeholder="Your name or nickname" required>
-        <button type="button" id="start-btn" class="caps">Let's play!</button>
+        <button id="start-btn">Let's play!</button>
     </div>
     <div id="game">
-        <p id="username-out"></p>
-        <p id="time" class="caps">time</p>
-        <p id="score" class="caps">score</p>
-        <p id="moves" class="caps">moves</p>
+        <p id="time" class="caps"></p>
+        <p id="score" class="caps"></p>
+        <p id="moves" class="caps"></p>
         <div id="card-deck">
         </div>
+    </div>
+    <div id="game-over">
+        <h2 class="caps">Congratulations, you have won!</h2>
+        <div id="stats-container"></div>
+        <button id="restart-btn">Restart</button>
     </div>
     <script src="design.js"></script>
 </body>

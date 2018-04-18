@@ -1,4 +1,5 @@
 let startBtn = document.getElementById("start-btn");
+let restartBtn = document.getElementById("restart-btn");
 let cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
@@ -8,8 +9,12 @@ let open = cardDeck.getElementsByClassName("open");
 let classes = [];
 //move counter
 let moves = 0;
+const moveHolder = document.getElementById("moves");
 //i for use in loops
 let i = 0;
+
+//Array with symbols
+const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet", "anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet"];
 
 //toggles three classes at once
 function toggleTrio(el, class1, class2, class3) {
@@ -34,9 +39,6 @@ function shuffle(array) {
     return array;
 }
 
-//Array with symbols
-const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet", "anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet"];
-
 //Function to add cards
 function addCards(parent, srcArray) {
 
@@ -58,6 +60,7 @@ function clickHandler() {
 
             //increment moves count
             moves++;
+            moveHolder.innerHTML = `moves: ${moves}`;
 
             //toggle classes
             toggleTrio(this, "unmatched", "flipped", "open");
@@ -79,7 +82,7 @@ function clickHandler() {
                         for (i = 1; i >= 0; i--) {
                             toggleTrio(open[i], "unmatched", "flipped", "open");
                         }
-                    }, 1200);
+                    }, 1000);
 
                     classes.length = 0;
                 }
@@ -92,3 +95,5 @@ startBtn.addEventListener("click", function(){
     addCards(cardDeck,symbols);
     clickHandler();
 })
+
+//document.addEventListener("DOMContentLoaded",)

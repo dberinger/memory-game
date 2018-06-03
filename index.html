@@ -4,15 +4,16 @@
 <head>
     <title>Memory Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/solid.js" integrity="sha384-P4tSluxIpPk9wNy8WSD8wJDvA8YZIkC6AQ+BfAFLXcUZIPQGu4Ifv4Kqq+i2XzrM" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/fontawesome.js" integrity="sha384-2IUdwouOFWauLdwTuAyHeMMRFfeyy4vqYNjodih+28v2ReC+8j+sLF9cK339k5hY" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="welcome">
-        <h1>Welcome to the memory game!</h1>
-        <h2>Here are the rules:</h2>
+    <div id="welcome" class="center">
+        <h1 class="caps">The memory game</h1>
+        <h2 class="caps">Here are the rules:</h2>
         <ul>
             <li>each round you have two clicks to reveal underlying symbols of two chosen cards</li>
             <li>if two symbols match, the two cards stay flipped over</li>
@@ -20,19 +21,23 @@
             <li>in order to win, all cards must be matched</li>
             <li>there is no time or click limit</li>
         </ul>
-        <button id="start-btn">Let's play!</button>
+        <button id="start-btn" class="modal-btn caps">Let's play!</button>
     </div>
-    <div id="game">
+    <div id="game" class="hidden">
         <p id="time" class="caps"></p>
         <p id="score" class="caps"></p>
         <p id="moves" class="caps"></p>
+        <div id="star-container"></div>
+        <button id="restart-btn">Restart</button>
+
         <div id="card-deck">
         </div>
     </div>
-    <div id="game-over">
+    <div id="game-over" class="hidden">
         <h2 class="caps">Congratulations, you have won!</h2>
         <div id="stats-container"></div>
-        <button id="restart-btn">Restart</button>
+        <p>Do you want to play again?</p>
+        <button id="new-game-btn" class="caps">yes!</button>
     </div>
     <script src="design.js"></script>
 </body>

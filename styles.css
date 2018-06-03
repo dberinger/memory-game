@@ -1,3 +1,7 @@
+/*--------------------------------------------------------------------------*/
+/*CARDS STYLING*/
+/*--------------------------------------------------------------------------*/
+
 .flip {
     position: relative;
     width: 200px;
@@ -38,11 +42,12 @@
     z-index: 1;
 }
 
-.back {background: #1fa2ff;
-background: -moz-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
-background: -webkit-linear-gradient(top, #1fa2ff 0%,#12d8fa 44%);
-background: linear-gradient(to bottom, #1fa2ff 0%,#12d8fa 44%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fa2ff', endColorstr='#12d8fa',GradientType=0 );
+.back {
+    background: #1fa2ff;
+    background: -moz-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
+    background: -webkit-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
+    background: linear-gradient(to bottom, #1fa2ff 0%, #12d8fa 44%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fa2ff', endColorstr='#12d8fa', GradientType=0);
 
     transform: rotateY(-180deg);
     display: flex;
@@ -54,11 +59,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fa2ff', end
     transform: rotateY(-180deg);
 }
 
-#card-deck {
-    display: flex;
-    flex-flow: wrap;
-}
-
 .matched {
     pointer-events: none;
 }
@@ -67,6 +67,69 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fa2ff', end
     pointer-events: none;
 }
 
-.hide {
+#card-deck {
+    display: flex;
+    flex-flow: wrap;
+}
+
+/*--------------------------------------------------------------------------*/
+/*COMMON CLASSES*/
+/*--------------------------------------------------------------------------*/
+
+.hidden {
     display: none;
+}
+
+.center {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+/*--------------------------------------------------------------------------*/
+/*WELCOME SCREEN STYLING - MOBILE FIRST*/
+/*--------------------------------------------------------------------------*/
+
+#welcome {
+    padding: 1em;
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    background-color: #1fa2ff;
+    color: #485563;
+    letter-spacing: 3px;
+}
+
+body {
+    background-color: #485563;
+}
+
+#welcome h2 {
+    color: gainsboro;
+    letter-spacing: 1px;
+}
+
+ul {
+    display: inline-block;
+    text-align: left;
+    color: gainsboro;
+    margin: 2em 0;
+    max-width: 500px;
+}
+
+.modal-btn {
+    max-width: 600px;
+    font-family: 'Roboto Slab', serif;
+    padding: 1em;
+    background-color: #485563;
+    border: 1px solid #1fa2ff;
+    color: gainsboro;
 }

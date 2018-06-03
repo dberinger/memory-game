@@ -1,3 +1,10 @@
+/*  TODO:
+    -welcome page styling
+    -Let's play button functions
+    -Timer
+    -Stars rating
+*/
+
 let startBtn = document.getElementById("start-btn");
 let restartBtn = document.getElementById("restart-btn");
 let cardDeck = document.getElementById("card-deck");
@@ -9,7 +16,7 @@ let open = cardDeck.getElementsByClassName("open");
 let classes = [];
 //move counter
 let moves = 0;
-const moveHolder = document.getElementById("moves");
+const movesHolder = document.getElementById("moves");
 //i for use in loops
 let i = 0;
 
@@ -60,7 +67,7 @@ function clickHandler() {
 
             //increment moves count
             moves++;
-            moveHolder.innerHTML = `moves: ${moves}`;
+            movesHolder.innerHTML = `moves: ${moves}`;
 
             //toggle classes
             toggleTrio(this, "unmatched", "flipped", "open");
@@ -68,7 +75,7 @@ function clickHandler() {
 
             //compare 2 classes from the array
             if (classes.length === 2) {
-
+                //on match
                 if (classes[0] === classes[1]) {
 
                     for (i = 1; i >= 0; i--) {

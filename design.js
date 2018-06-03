@@ -1,13 +1,16 @@
 /*  TODO:
-    -welcome page styling
     -Let's play button functions
-    -Timer
     -Stars rating
 */
 
-let startBtn = document.getElementById("start-btn");
-let restartBtn = document.getElementById("restart-btn");
-let cardDeck = document.getElementById("card-deck");
+/*--------------------------------------------------------------------------*/
+/*DECLARATIONS*/
+/*--------------------------------------------------------------------------*/
+const welcomeModal = document.getElementById("welcome");
+const mainGame = document.getElementById("main-game");
+const startBtn = document.getElementById("start-btn");
+const restartBtn = document.getElementById("restart-btn");
+const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
 //temporarily stores only two clicked cards
@@ -19,10 +22,47 @@ let moves = 0;
 const movesHolder = document.getElementById("moves");
 //i for use in loops
 let i = 0;
-
+//timer setup
+const timer = document.getElementById("timer");
+let minutes = 0;
+let seconds = 0;
+let t;
 //Array with symbols
 const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet", "anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet"];
 
+/*--------------------------------------------------------------------------*/
+/*TIMER*/
+/*--------------------------------------------------------------------------*/
+//timer based on Daniel Hug's JS Fiddle https://jsfiddle.net/Daniel_Hug/pvk6p/
+function timerCount() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+    }
+
+    timer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    startTimer();
+}
+
+function startTimer() {
+    t = setTimeout(timerCount, 1000);
+}
+
+function stopTimer() {
+    clearTimeout(t);
+}
+
+function clearTimer() {
+    timer.textContent = "00:00";
+    seconds = 0;
+    minutes = 0;
+}
+
+/*--------------------------------------------------------------------------*/
+/*FUNCTIONS*/
+/*--------------------------------------------------------------------------*/
 //toggles three classes at once
 function toggleTrio(el, class1, class2, class3) {
     el.classList.toggle(class1);
@@ -46,6 +86,9 @@ function shuffle(array) {
     return array;
 }
 
+/*--------------------------------------------------------------------------*/
+/*MAIN GAME LOGIC*/
+/*--------------------------------------------------------------------------*/
 //Function to add cards
 function addCards(parent, srcArray) {
 
@@ -98,9 +141,16 @@ function clickHandler() {
     }
 }
 
-startBtn.addEventListener("click", function(){
-    addCards(cardDeck,symbols);
+/*--------------------------------------------------------------------------*/
+/*BUTTONS*/
+/*--------------------------------------------------------------------------*/
+startBtn.addEventListener("click", function () {
+    addCards(cardDeck, symbols);
     clickHandler();
+    welcomeModal.classList.add("hidden");
+    mainGame.classList.toggle("hidden");
+    startTimer();
+
 })
 
-//document.addEventListener("DOMContentLoaded",)
+

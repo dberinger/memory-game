@@ -170,3 +170,11 @@ startBtn.addEventListener("click", function () {
     startTimer();
 
 })
+
+restartBtn.addEventListener("click", function() {
+    stopTimer();
+    clearTimer();
+    startTimer();
+    moves=0;
+    movesHolder.innerHTML = `moves: ${moves}`;
+})

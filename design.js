@@ -66,6 +66,11 @@ function clearTimer() {
     minutes = 0;
 }
 
+function restartTimer() {
+    stopTimer();
+    clearTimer();
+    startTimer();
+}
 /*--------------------------------------------------------------------------*/
 /*FUNCTIONS*/
 /*--------------------------------------------------------------------------*/
@@ -104,6 +109,12 @@ function movesCounter() {
     moves++;
     movesHolder.innerHTML = `moves: ${moves}`;
 }
+
+function resetMovesCounter() {
+    moves = 0;
+    movesHolder.innerHTML = `moves: ${moves}`;
+}
+
 /*--------------------------------------------------------------------------*/
 /*MAIN GAME LOGIC*/
 /*--------------------------------------------------------------------------*/
@@ -171,10 +182,7 @@ startBtn.addEventListener("click", function () {
 
 })
 
-restartBtn.addEventListener("click", function() {
-    stopTimer();
-    clearTimer();
-    startTimer();
-    moves=0;
-    movesHolder.innerHTML = `moves: ${moves}`;
+restartBtn.addEventListener("click", function () {
+    restartTimer();
+    resetMovesCounter();
 })

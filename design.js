@@ -1,3 +1,5 @@
+//star rating
+
 /*  TODO:
     -Let's play button functions
     -Stars rating
@@ -10,6 +12,7 @@ const welcomeModal = document.getElementById("welcome");
 const mainGame = document.getElementById("main-game");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
+const stars = document.getElementById("star-container");
 const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
@@ -27,7 +30,7 @@ const timer = document.getElementById("timer");
 let minutes = 0;
 let seconds = 0;
 let t;
-//Array with symbols
+//array with symbols
 const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet", "anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet"];
 
 /*--------------------------------------------------------------------------*/
@@ -86,6 +89,18 @@ function shuffle(array) {
     return array;
 }
 
+//removes a star if number of moves is equal to 20 or 35
+function starRating() {
+    if (moves === 20 || moves === 35) {
+        stars.lastElementChild.outerHTML = "";
+    }
+}
+
+//increments and displays moves
+function movesCounter() {
+    moves++;
+    movesHolder.innerHTML = `moves: ${moves}`;
+}
 /*--------------------------------------------------------------------------*/
 /*MAIN GAME LOGIC*/
 /*--------------------------------------------------------------------------*/
@@ -108,9 +123,9 @@ function clickHandler() {
 
         cards[i].addEventListener("click", function () {
 
-            //increment moves count
-            moves++;
-            movesHolder.innerHTML = `moves: ${moves}`;
+            //count moves and rate the user with stars
+            movesCounter();
+            starRating();
 
             //toggle classes
             toggleTrio(this, "unmatched", "flipped", "open");
@@ -152,5 +167,3 @@ startBtn.addEventListener("click", function () {
     startTimer();
 
 })
-
-

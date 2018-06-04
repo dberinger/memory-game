@@ -1,8 +1,11 @@
-//star rating
-
 /*  TODO:
-    -Let's play button functions
-    -Stars rating
+    -restart button
+    -congrats popup
+    -styling
+    -RWD
+    -readme
+    -comments
+    -code quality
 */
 
 /*--------------------------------------------------------------------------*/

@@ -1,5 +1,4 @@
 /*  TODO:
-    -restart button !!!!
     -congrats popup
     -styling
     -RWD
@@ -11,10 +10,13 @@
 /*--------------------------------------------------------------------------*/
 /*DECLARATIONS*/
 /*--------------------------------------------------------------------------*/
-const welcomeModal = document.getElementById("welcome");
+const welcome = document.getElementById("welcome");
+const gameOver = document.getElementById("game-over");
+const stats = document.getElementById("stats-container");
 const mainGame = document.getElementById("main-game");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
+const newGameBtn = document.getElementById("new-game-btn");
 const stars = document.getElementById("star-container");
 //stores number of stars, 3 by default
 let starCount = 3;
@@ -210,12 +212,18 @@ function clickHandler() {
 startBtn.addEventListener("click", function () {
     addCards(cardDeck, symbols);
     clickHandler();
-    welcomeModal.classList.add("hidden");
+    welcome.classList.add("hidden");
     mainGame.classList.toggle("hidden");
-    restartTimer();
+    startTimer();
 
 })
 
 restartBtn.addEventListener("click", function () {
+    newGame();
+})
+
+newGameBtn.addEventListener("click", function() {
+    gameOver.classList.toggle("hidden");
+    mainGame.classList.toggle("hidden");
     newGame();
 })

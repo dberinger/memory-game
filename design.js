@@ -5,13 +5,14 @@
     -readme
     -comments
     -code quality
+    -match is buggy :< :< :<
 */
 
 /*--------------------------------------------------------------------------*/
 /*DECLARATIONS*/
 /*--------------------------------------------------------------------------*/
-const welcome = document.getElementById("welcome");
-const gameOver = document.getElementById("game-over");
+const welcomeModal = document.getElementById("welcome");
+const gameOverModal = document.getElementById("game-over");
 const stats = document.getElementById("stats-container");
 const mainGame = document.getElementById("main-game");
 const startBtn = document.getElementById("start-btn");
@@ -25,6 +26,7 @@ const cardDeck = document.getElementById("card-deck");
 let cards = cardDeck.getElementsByClassName("card");
 //temporarily stores only two clicked cards
 let open = cardDeck.getElementsByClassName("open");
+let matched = cardDeck.getElementsByClassName("matched");
 //temporarily stores classes of two clicked cards
 let classes = [];
 //move counter
@@ -148,6 +150,7 @@ function newGame() {
     resetStarRating();
     cardDeck.innerHTML = "";
     classes.length = 0;
+    matched.length = 0;
     addCards(cardDeck, symbols);
     clickHandler();
 }
@@ -176,6 +179,8 @@ function clickHandler() {
             //count moves and rate the user with stars
             movesCounter();
             starRating();
+            //display a congratulions popup when all cards match
+            setTimeout(gameOver, 5000);
 
             //toggle classes
             toggleTrio(this, "unmatched", "flipped", "open");
@@ -206,24 +211,34 @@ function clickHandler() {
     }
 }
 
+//congratulations popup
+//REMEMBER to change after testing
+function gameOver() {
+    if (matched.length === 2) {
+        stopTimer();
+        mainGame.classList.add("hidden");
+        stats.innerHTML = `It took you ${minutes} minutes and ${seconds} seconds to win the game. You've earned ${starCount} star(s).`
+        gameOverModal.classList.remove("hidden");
+    }
+}
+
 /*--------------------------------------------------------------------------*/
 /*BUTTONS*/
 /*--------------------------------------------------------------------------*/
 startBtn.addEventListener("click", function () {
     addCards(cardDeck, symbols);
     clickHandler();
-    welcome.classList.add("hidden");
+    welcomeModal.classList.add("hidden");
     mainGame.classList.toggle("hidden");
     startTimer();
-
 })
 
 restartBtn.addEventListener("click", function () {
     newGame();
 })
 
-newGameBtn.addEventListener("click", function() {
-    gameOver.classList.toggle("hidden");
+newGameBtn.addEventListener("click", function () {
+    gameOverModal.classList.toggle("hidden");
     mainGame.classList.toggle("hidden");
     newGame();
 })

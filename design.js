@@ -1,5 +1,5 @@
 /*  TODO:
-    -restart button
+    -restart button !!!!
     -congrats popup
     -styling
     -RWD
@@ -16,6 +16,8 @@ const mainGame = document.getElementById("main-game");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
 const stars = document.getElementById("star-container");
+//stores number of stars, 3 by default
+let starCount = 3;
 const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
@@ -71,8 +73,48 @@ function restartTimer() {
     clearTimer();
     startTimer();
 }
+
 /*--------------------------------------------------------------------------*/
-/*FUNCTIONS*/
+/*STAR RATING*/
+/*--------------------------------------------------------------------------*/
+//removes a star if number of moves is equal to 20 or 35
+function starRating() {
+    if (moves === 2 || moves === 5) {
+        //remove a star
+        stars.lastElementChild.outerHTML = "";
+        if (starCount > 0)
+            starCount--;
+    }
+}
+
+//resets stars to default
+function resetStarRating() {
+    const starStr = `<i class="fas fa-star"></i>`;
+
+    while (starCount < 3) {
+        //add a star
+        stars.insertAdjacentHTML("afterbegin", starStr);
+        starCount++;
+    }
+}
+
+/*--------------------------------------------------------------------------*/
+/*MOVES*/
+/*--------------------------------------------------------------------------*/
+//increments and displays moves
+function movesCounter() {
+    moves++;
+    movesHolder.innerHTML = `moves: ${moves}`;
+}
+
+//resets moves
+function resetMovesCounter() {
+    moves = 0;
+    movesHolder.innerHTML = `moves: ${moves}`;
+}
+
+/*--------------------------------------------------------------------------*/
+/*OTHER FUNCTIONS*/
 /*--------------------------------------------------------------------------*/
 //toggles three classes at once
 function toggleTrio(el, class1, class2, class3) {
@@ -97,24 +139,16 @@ function shuffle(array) {
     return array;
 }
 
-//removes a star if number of moves is equal to 20 or 35
-function starRating() {
-    if (moves === 20 || moves === 35) {
-        stars.lastElementChild.outerHTML = "";
-    }
+//sets new card deck and resets time, stars, rating and moves
+function newGame() {
+    restartTimer();
+    resetMovesCounter();
+    resetStarRating();
+    cardDeck.innerHTML = "";
+    classes.length = 0;
+    addCards(cardDeck, symbols);
+    clickHandler();
 }
-
-//increments and displays moves
-function movesCounter() {
-    moves++;
-    movesHolder.innerHTML = `moves: ${moves}`;
-}
-
-function resetMovesCounter() {
-    moves = 0;
-    movesHolder.innerHTML = `moves: ${moves}`;
-}
-
 /*--------------------------------------------------------------------------*/
 /*MAIN GAME LOGIC*/
 /*--------------------------------------------------------------------------*/
@@ -133,7 +167,7 @@ function addCards(parent, srcArray) {
 
 function clickHandler() {
 
-    for (i; i < cards.length; i++) {
+    for (i = 0; i < cards.length; i++) {
 
         cards[i].addEventListener("click", function () {
 
@@ -178,11 +212,10 @@ startBtn.addEventListener("click", function () {
     clickHandler();
     welcomeModal.classList.add("hidden");
     mainGame.classList.toggle("hidden");
-    startTimer();
+    restartTimer();
 
 })
 
 restartBtn.addEventListener("click", function () {
-    restartTimer();
-    resetMovesCounter();
+    newGame();
 })

@@ -1,13 +1,120 @@
+body {
+    font-family: 'Roboto Slab', serif;
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+.center {
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.vertical-center {
+    display: flex;
+    height: 100vw;
+    flex-flow: column;
+    align-items: stretch;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
 /*--------------------------------------------------------------------------*/
-/*CARDS STYLING*/
+/*WELCOME MODAL - MOBILE FIRST*/
 /*--------------------------------------------------------------------------*/
+#welcome {
+    padding: 1em;
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    background-color: #1fa2ff;
+    color: #485563;
+    letter-spacing: 3px;
+}
+
+body {
+    background-color: #485563;
+}
+
+#welcome h2 {
+    color: gainsboro;
+    letter-spacing: 1px;
+}
+
+ul {
+    display: inline-block;
+    text-align: left;
+    color: gainsboro;
+    margin: 2em 0;
+    max-width: 500px;
+}
+
+.modal-btn {
+    max-width: 600px;
+    font-family: 'Roboto Slab', serif;
+    padding: 1em;
+    font-size: 1.25em;
+    background-color: #485563;
+    border: 1px solid #1fa2ff;
+    color: gainsboro;
+}
+
+/*--------------------------------------------------------------------------*/
+/*STATS*/
+/*--------------------------------------------------------------------------*/
+#stats-container {
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: baseline;
+    color: gainsboro;
+}
+
+#restart-btn {
+    padding: 0 1em;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1em;
+    background-color: #485563;
+    border: 1px solid #1fa2ff;
+    color: gainsboro;
+}
+
+/*--------------------------------------------------------------------------*/
+/*CARDS*/
+/*--------------------------------------------------------------------------*/
+#main-game {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100vh;
+    margin-bottom: 1.5em;
+}
+
+#card-deck {
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
 
 .flip {
     position: relative;
-    width: 200px;
-    height: 260px;
-    margin: 10px;
-
+    flex-basis: 23%;
+    height: 120px;
+    margin: 2px;
 }
 
 .card {
@@ -16,7 +123,9 @@
     position: absolute;
     transform-style: preserve-3d;
     transition: 1s;
-    font-size: 5em;
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
 }
 
 .face {
@@ -67,70 +176,24 @@
     pointer-events: none;
 }
 
-#card-deck {
-    display: flex;
-    flex-flow: wrap;
-}
-
 /*--------------------------------------------------------------------------*/
-/*COMMON CLASSES*/
+/*CONGRATULATIONS MODAL*/
 /*--------------------------------------------------------------------------*/
 
-.hidden {
-    display: none !important;
-}
-
-.center {
-    text-align: center;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.caps {
-    text-transform: uppercase;
-}
-
-/*--------------------------------------------------------------------------*/
-/*WELCOME SCREEN STYLING - MOBILE FIRST*/
-/*--------------------------------------------------------------------------*/
-
-#welcome {
-    padding: 1em;
-    font-family: 'Roboto Slab', serif;
+#game-over {
+    color: gainsboro;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    justify-content: space-around;
 }
 
-h1 {
+#game-over h2 {
     background-color: #1fa2ff;
     color: #485563;
-    letter-spacing: 3px;
+    margin: 0;
+    width: 100vw;
+
 }
 
-body {
-    background-color: #485563;
-}
-
-#welcome h2 {
-    color: gainsboro;
-    letter-spacing: 1px;
-}
-
-ul {
-    display: inline-block;
-    text-align: left;
-    color: gainsboro;
-    margin: 2em 0;
-    max-width: 500px;
-}
-
-.modal-btn {
-    max-width: 600px;
-    font-family: 'Roboto Slab', serif;
-    padding: 1em;
-    font-size: 1.25em;
-    background-color: #485563;
-    border: 1px solid #1fa2ff;
-    color: gainsboro;
-}

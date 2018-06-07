@@ -1,5 +1,4 @@
 /*  TODO:
-    -congrats popup
     -styling
     -RWD
     -readme
@@ -13,7 +12,7 @@
 /*--------------------------------------------------------------------------*/
 const welcomeModal = document.getElementById("welcome");
 const gameOverModal = document.getElementById("game-over");
-const stats = document.getElementById("stats-container");
+const stats = document.getElementById("stats-popup");
 const mainGame = document.getElementById("main-game");
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");

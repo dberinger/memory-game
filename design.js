@@ -10,72 +10,43 @@
 /*--------------------------------------------------------------------------*/
 /*DECLARATIONS*/
 /*--------------------------------------------------------------------------*/
+//3 main screens
 const welcomeModal = document.getElementById("welcome");
 const gameOverModal = document.getElementById("game-over");
-const stats = document.getElementById("stats-popup");
 const mainGame = document.getElementById("main-game");
+
+//buttons
 const startBtn = document.getElementById("start-btn");
 const restartBtn = document.getElementById("restart-btn");
 const newGameBtn = document.getElementById("new-game-btn");
+
+//will contain user's stats at the end of the game
+const stats = document.getElementById("stats-popup");
 const stars = document.getElementById("star-container");
 //stores number of stars, 3 by default
 let starCount = 3;
+//moves counter
+let moves = 0;
+const movesHolder = document.getElementById("moves");
+//timer setup
+const timer = document.getElementById("timer");
+let minutes = 0;
+let seconds = 0;
+//t for interval
+let t;
+
 const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
 //temporarily stores only two clicked cards
 let open = cardDeck.getElementsByClassName("open");
+//collection of cards that matched
 let matched = cardDeck.getElementsByClassName("matched");
 //temporarily stores classes of two clicked cards
 let classes = [];
-//move counter
-let moves = 0;
-const movesHolder = document.getElementById("moves");
-//i for use in loops
-let i = 0;
-//timer setup
-const timer = document.getElementById("timer");
-let minutes = 0;
-let seconds = 0;
-let t;
 //array with symbols
 const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet", "anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-sign", "fighter-jet"];
 
-/*--------------------------------------------------------------------------*/
-/*TIMER*/
-/*--------------------------------------------------------------------------*/
-//timer based on Daniel Hug's JS Fiddle https://jsfiddle.net/Daniel_Hug/pvk6p/
-function timerCount() {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-    }
-
-    timer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
-    startTimer();
-}
-
-function startTimer() {
-    t = setTimeout(timerCount, 1000);
-}
-
-function stopTimer() {
-    clearTimeout(t);
-}
-
-function clearTimer() {
-    timer.textContent = "00:00";
-    seconds = 0;
-    minutes = 0;
-}
-
-function restartTimer() {
-    stopTimer();
-    clearTimer();
-    startTimer();
-}
 
 /*--------------------------------------------------------------------------*/
 /*STAR RATING*/
@@ -117,7 +88,43 @@ function resetMovesCounter() {
 }
 
 /*--------------------------------------------------------------------------*/
-/*OTHER FUNCTIONS*/
+/*TIMER*/
+/*--------------------------------------------------------------------------*/
+//timer based on Daniel Hug's JS Fiddle https://jsfiddle.net/Daniel_Hug/pvk6p/
+function timerCount() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+    }
+
+    timer.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    startTimer();
+}
+
+function startTimer() {
+    t = setTimeout(timerCount, 1000);
+}
+
+function stopTimer() {
+    clearTimeout(t);
+}
+
+function clearTimer() {
+    timer.textContent = "00:00";
+    seconds = 0;
+    minutes = 0;
+}
+
+function restartTimer() {
+    stopTimer();
+    clearTimer();
+    startTimer();
+}
+
+/*--------------------------------------------------------------------------*/
+/*MAIN GAME LOGIC*/
 /*--------------------------------------------------------------------------*/
 //toggles three classes at once
 function toggleTrio(el, class1, class2, class3) {
@@ -142,21 +149,7 @@ function shuffle(array) {
     return array;
 }
 
-//sets new card deck and resets time, stars, rating and moves
-function newGame() {
-    restartTimer();
-    resetMovesCounter();
-    resetStarRating();
-    cardDeck.innerHTML = "";
-    classes.length = 0;
-    matched.length = 0;
-    addCards(cardDeck, symbols);
-    clickHandler();
-}
-/*--------------------------------------------------------------------------*/
-/*MAIN GAME LOGIC*/
-/*--------------------------------------------------------------------------*/
-//Function to add cards
+//adds shuffled cards
 function addCards(parent, srcArray) {
 
     shuffle(srcArray);
@@ -168,7 +161,7 @@ function addCards(parent, srcArray) {
     parent.insertAdjacentHTML("afterbegin", tempStr);
 }
 
-
+//handles click events
 function clickHandler() {
 
     for (i = 0; i < cards.length; i++) {
@@ -210,7 +203,21 @@ function clickHandler() {
     }
 }
 
-//congratulations popup
+/*--------------------------------------------------------------------------*/
+/*BUTTONS*/
+/*--------------------------------------------------------------------------*/
+//sets new card deck and resets time, stars, rating and moves
+function newGame() {
+    restartTimer();
+    resetMovesCounter();
+    resetStarRating();
+    cardDeck.innerHTML = "";
+    classes.length = 0;
+    matched.length = 0;
+    addCards(cardDeck, symbols);
+    clickHandler();
+}
+
 //REMEMBER to change after testing
 function gameOver() {
     if (matched.length === 2) {
@@ -221,9 +228,6 @@ function gameOver() {
     }
 }
 
-/*--------------------------------------------------------------------------*/
-/*BUTTONS*/
-/*--------------------------------------------------------------------------*/
 startBtn.addEventListener("click", function () {
     addCards(cardDeck, symbols);
     clickHandler();

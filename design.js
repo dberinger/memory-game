@@ -1,5 +1,5 @@
 /*  TODO:
-    -styling
+    -styling - congrats popup
     -RWD
     -readme
     -comments

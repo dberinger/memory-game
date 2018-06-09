@@ -1,20 +1,17 @@
-*
-{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body
-{
+body {
     font-family: 'Roboto Slab', serif;
 
     color: gainsboro;
     background-color: #485563;
 }
 
-button
-{
+button {
     font-family: 'Roboto Slab', serif;
     font-size: 1.25em;
 
@@ -25,21 +22,18 @@ button
     background-color: #485563;
 }
 
-.hidden
-{
+.hidden {
     display: none !important;
 }
 
-.center
-{
+.center {
     margin-right: 0;
     margin-left: 0;
 
     text-align: center;
 }
 
-.caps
-{
+.caps {
     text-transform: uppercase;
 }
 
@@ -49,21 +43,22 @@ button
 
 /*--------------------------------------------------------------------------*/
 
-#welcome
-{
+#welcome {
     display: flex;
     flex-direction: column;
 
     height: 100vh;
+    max-height: 800px;
     padding: 1em;
 
     align-items: center;
     justify-content: space-around;
 }
 
-h1, #game-over h2
-{
+h1,
+#game-over h2 {
     width: 100vw;
+    /*    max-width: 100%;*/
     padding: 0.5em;
 
     letter-spacing: 3px;
@@ -72,20 +67,18 @@ h1, #game-over h2
     background-color: #1fa2ff;
 }
 
-h2
-{
+h2 {
     padding: 1em 1em 0 1em;
     letter-spacing: 1px;
 }
 
-ul
-{
+ul {
     display: inline-block;
 
     max-width: 480px;
     margin: 2em 0;
+    margin-left: 1em;
     padding: 1em;
-
     text-align: left;
 }
 
@@ -95,11 +88,10 @@ ul
 
 /*--------------------------------------------------------------------------*/
 
-#stats-container
-{
+#stats-container {
     display: flex;
-
     width: 100vw;
+    max-width: 500px;
     padding: 1.5em 0;
 
     flex-flow: row nowrap;
@@ -107,8 +99,7 @@ ul
     align-items: baseline;
 }
 
-#restart-btn
-{
+#restart-btn {
     font-size: 1em;
 
     padding: 0 1em;
@@ -120,42 +111,40 @@ ul
 
 /*--------------------------------------------------------------------------*/
 
-#main-game
-{
+#main-game {
     display: flex;
     flex-direction: column;
-
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
     max-height: 100vh;
-    margin-bottom: 1.5em;
     padding: 1em;
 
     align-items: center;
 }
 
-#card-deck
-{
+#card-deck {
     display: flex;
 
     width: 100vw;
+    max-width: 500px;
 
     flex-flow: wrap;
     justify-content: center;
 }
 
-.flip
-{
+.flip {
     position: relative;
 
-    height: 120px;
+    height: 25vw;
+    max-height: 150px;
     margin: 2px;
+    font-size: 2em;
 
     flex-basis: 23%;
 }
 
-.card
-{
-    font-size: 2em;
-
+.card {
     position: absolute;
 
     width: 100%;
@@ -166,8 +155,7 @@ ul
     transform-style: preserve-3d;
 }
 
-.face
-{
+.face {
     position: absolute;
     z-index: 2;
 
@@ -180,47 +168,42 @@ ul
     backface-visibility: hidden;
 }
 
-.front
-{
+.front {
     position: absolute;
     z-index: 1;
 
     background: #485563;
-    background:    -moz-radial-gradient(center, ellipse cover, #485563 0%, #29323c 100%);
+    background: -moz-radial-gradient(center, ellipse cover, #485563 0%, #29323c 100%);
     background: -webkit-radial-gradient(center, ellipse cover, #485563 0%, #29323c 100%);
-    background:         radial-gradient(ellipse at center, #485563 0%, #29323c 100%);
+    background: radial-gradient(ellipse at center, #485563 0%, #29323c 100%);
 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#485563', endColorstr='#29323c', GradientType=1);
 }
 
-.back
-{
+.back {
     display: flex;
 
     transform: rotateY(-180deg);
 
     background: #1fa2ff;
-    background:    -moz-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
+    background: -moz-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
     background: -webkit-linear-gradient(top, #1fa2ff 0%, #12d8fa 44%);
-    background:         linear-gradient(to bottom, #1fa2ff 0%, #12d8fa 44%);
+    background: linear-gradient(to bottom, #1fa2ff 0%, #12d8fa 44%);
 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1fa2ff', endColorstr='#12d8fa', GradientType=0);
     justify-content: center;
     align-items: center;
 }
 
-.flipped
-{
+.flipped {
     transform: rotateY(-180deg);
 }
 
-.matched
-{
+.matched {
     pointer-events: none;
 }
 
-.open
-{
+.open {
     pointer-events: none;
 }
 
@@ -230,17 +213,41 @@ ul
 
 /*--------------------------------------------------------------------------*/
 
-#game-over
-{
+#game-over {
     display: flex;
     flex-direction: column;
     align-items: center;
 
     max-width: 100vw;
     height: 100vh;
+    max-height: 700px;
     padding: 1em;
 
     text-align: center;
 
     justify-content: space-around;
+}
+
+/*--------------------------------------------------------------------------*/
+
+/*MEDIUM DEVICES STYLING*/
+
+/*--------------------------------------------------------------------------*/
+
+/*welcome screen done*/
+@media (min-height: 700px) {
+    #stats-container {
+        margin: 2em 0;
+    }
+}
+@media (min-height: 500px) and (orientation:landscape) {
+
+    #card-deck {
+        max-width: 900px;
+    }
+
+    .flip {
+        flex-basis: 11%;
+
+    }
 }

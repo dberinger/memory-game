@@ -223,7 +223,7 @@ function gameOver() {
     if (matched.length === 2) {
         stopTimer();
         mainGame.classList.add("hidden");
-        stats.innerHTML = `It's taken you ${minutes} minutes and ${seconds} seconds to win the game. You've earned ${starCount} star(s).`
+        stats.innerHTML = `It took you ${minutes} minute(s) and ${seconds} seconds to win the game. You've earned ${starCount} star(s).`
         gameOverModal.classList.remove("hidden");
     }
 }

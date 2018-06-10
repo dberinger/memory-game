@@ -178,6 +178,8 @@ function clickHandler() {
 
             //compare 2 classes from the array
             if (classes.length === 2) {
+                //lock card deck
+                cardDeck.classList.toggle("locked");
                 //on match
                 if (classes[0] === classes[1]) {
 
@@ -185,6 +187,9 @@ function clickHandler() {
                         toggleTrio(open[i], "matched", "unmatched", "open");
                         classes.length = 0;
                     }
+                    //unlock card deck
+                    cardDeck.classList.toggle("locked");
+
                 } else {
                     //on mismatch
                     setTimeout(function () {
@@ -192,7 +197,10 @@ function clickHandler() {
                         for (i = 1; i >= 0; i--) {
                             toggleTrio(open[i], "unmatched", "flipped", "open");
                         }
-                    }, 1000);
+                        //unlock card deck
+                        cardDeck.classList.toggle("locked");
+
+                    }, 700);
 
                     classes.length = 0;
                 }

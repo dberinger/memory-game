@@ -222,7 +222,8 @@ ul
 }
 
 .matched,
-.open
+.open,
+.locked
 {
     pointer-events: none;
 }

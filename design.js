@@ -50,7 +50,7 @@ const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-s
 /*--------------------------------------------------------------------------*/
 //removes a star if number of moves is equal to 20 or 35
 function starRating() {
-    if (moves === 20 || moves === 35) {
+    if (moves === 40 || moves === 50) {
         //remove a star
         stars.lastElementChild.outerHTML = "";
         if (starCount > 0)

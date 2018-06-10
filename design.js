@@ -1,10 +1,6 @@
 /*  TODO:
-    -styling - congrats popup
-    -RWD
     -readme
     -comments
-    -code quality
-    -match is buggy :< :< :<
 */
 
 /*--------------------------------------------------------------------------*/
@@ -35,12 +31,13 @@ let seconds = 0;
 //t for interval
 let t;
 
+//card deck - container
 const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
 //temporarily stores only two clicked cards
 let open = cardDeck.getElementsByClassName("open");
-//collection of cards that matched
+//collection of cards that match
 let matched = cardDeck.getElementsByClassName("matched");
 //temporarily stores classes of two clicked cards
 let classes = [];
@@ -53,7 +50,7 @@ const symbols = ["anchor", "at", "bicycle", "bug", "camera", "coffee", "dollar-s
 /*--------------------------------------------------------------------------*/
 //removes a star if number of moves is equal to 20 or 35
 function starRating() {
-    if (moves === 2 || moves === 5) {
+    if (moves === 20 || moves === 35) {
         //remove a star
         stars.lastElementChild.outerHTML = "";
         if (starCount > 0)
@@ -66,7 +63,7 @@ function resetStarRating() {
     const starStr = `<i class="fas fa-star"></i>`;
 
     while (starCount < 3) {
-        //add a star
+        //add star(s)
         stars.insertAdjacentHTML("afterbegin", starStr);
         starCount++;
     }
@@ -167,9 +164,10 @@ function clickHandler() {
     for (i = 0; i < cards.length; i++) {
 
         cards[i].addEventListener("click", function () {
-
-            //count moves and rate the user with stars
+            console.log(classes);
+            //counts moves
             movesCounter();
+            //rates user with stars
             starRating();
             //display a congratulions popup when all cards match
             setTimeout(gameOver, 5000);
@@ -204,9 +202,9 @@ function clickHandler() {
 }
 
 /*--------------------------------------------------------------------------*/
-/*BUTTONS*/
+/*BUTTONS AND RELATED FUNCTIONS*/
 /*--------------------------------------------------------------------------*/
-//sets new card deck and resets time, stars, rating and moves
+//sets new card deck, resets time, stars, rating and moves
 function newGame() {
     restartTimer();
     resetMovesCounter();
@@ -218,16 +216,17 @@ function newGame() {
     clickHandler();
 }
 
-//REMEMBER to change after testing
+//stops timer, displays congratulations popup
 function gameOver() {
-    if (matched.length === 2) {
+    if (matched.length === 16) {
         stopTimer();
         mainGame.classList.add("hidden");
-        stats.innerHTML = `It took you ${minutes} minute(s) and ${seconds} seconds to win the game. You've earned ${starCount} star(s).`
+        stats.innerHTML = `It took you ${minutes} minute(s) and ${seconds} seconds to win the game in ${moves} moves. You've earned ${starCount} star(s).`
         gameOverModal.classList.remove("hidden");
     }
 }
 
+//'LET'S PLAY' button
 startBtn.addEventListener("click", function () {
     addCards(cardDeck, symbols);
     clickHandler();
@@ -236,10 +235,12 @@ startBtn.addEventListener("click", function () {
     startTimer();
 })
 
+//'RESTART' button
 restartBtn.addEventListener("click", function () {
     newGame();
 })
 
+//'YES!' button
 newGameBtn.addEventListener("click", function () {
     gameOverModal.classList.toggle("hidden");
     mainGame.classList.toggle("hidden");

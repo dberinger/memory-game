@@ -1,8 +1,5 @@
-/*  TODO:
-    -readme
-    -comments
-*/
-
+/*jshint esversion: 6 */
+/*jshint browser: true */
 /*--------------------------------------------------------------------------*/
 /*DECLARATIONS*/
 /*--------------------------------------------------------------------------*/
@@ -36,7 +33,7 @@ const cardDeck = document.getElementById("card-deck");
 //collection of all cards
 let cards = cardDeck.getElementsByClassName("card");
 //temporarily stores only two clicked cards
-let open = cardDeck.getElementsByClassName("open");
+let opened = cardDeck.getElementsByClassName("open");
 //collection of cards that match
 let matched = cardDeck.getElementsByClassName("matched");
 //temporarily stores classes of two clicked cards
@@ -158,54 +155,56 @@ function addCards(parent, srcArray) {
     parent.insertAdjacentHTML("afterbegin", tempStr);
 }
 
-//handles click events
-function clickHandler() {
+//function responsible for counting moves, stars, timer, matching, unmatching
+function gameHandler() {
+    //counts moves
+    movesCounter();
+    //rates user with stars
+    starRating();
+    //display a congratulions popup when all cards match
+    setTimeout(gameOver, 5000);
 
-    for (i = 0; i < cards.length; i++) {
+    //toggle classes
+    toggleTrio(this, "unmatched", "flipped", "open");
+    classes.push(this.className);
 
-        cards[i].addEventListener("click", function () {
-            console.log(classes);
-            //counts moves
-            movesCounter();
-            //rates user with stars
-            starRating();
-            //display a congratulions popup when all cards match
-            setTimeout(gameOver, 5000);
+    //compare 2 classes from the array
+    if (classes.length === 2) {
+        //lock card deck
+        cardDeck.classList.toggle("locked");
+        //on match
+        if (classes[0] === classes[1]) {
 
-            //toggle classes
-            toggleTrio(this, "unmatched", "flipped", "open");
-            classes.push(this.className);
-
-            //compare 2 classes from the array
-            if (classes.length === 2) {
-                //lock card deck
-                cardDeck.classList.toggle("locked");
-                //on match
-                if (classes[0] === classes[1]) {
-
-                    for (i = 1; i >= 0; i--) {
-                        toggleTrio(open[i], "matched", "unmatched", "open");
-                        classes.length = 0;
-                    }
-                    //unlock card deck
-                    cardDeck.classList.toggle("locked");
-
-                } else {
-                    //on mismatch
-                    setTimeout(function () {
-
-                        for (i = 1; i >= 0; i--) {
-                            toggleTrio(open[i], "unmatched", "flipped", "open");
-                        }
-                        //unlock card deck
-                        cardDeck.classList.toggle("locked");
-
-                    }, 700);
-
-                    classes.length = 0;
-                }
+            for (let i = 1; i >= 0; i--) {
+                toggleTrio(opened[i], "matched", "unmatched", "open");
+                classes.length = 0;
             }
-        });
+            //unlock card deck
+            cardDeck.classList.toggle("locked");
+
+        } else {
+            //on mismatch
+            setTimeout(function () {
+
+                for (let i = 1; i >= 0; i--) {
+                    toggleTrio(opened[i], "unmatched", "flipped", "open");
+                }
+                //unlock card deck
+                cardDeck.classList.toggle("locked");
+
+            }, 700);
+
+            classes.length = 0;
+        }
+    }
+}
+
+//adds event listeners to all cards
+function addListeners() {
+
+    for (let i = 0; i < cards.length; i++) {
+
+        cards[i].addEventListener("click", gameHandler);
     }
 }
 
@@ -221,7 +220,7 @@ function newGame() {
     classes.length = 0;
     matched.length = 0;
     addCards(cardDeck, symbols);
-    clickHandler();
+    addListeners();
 }
 
 //stops timer, displays congratulations popup
@@ -229,7 +228,7 @@ function gameOver() {
     if (matched.length === 16) {
         stopTimer();
         mainGame.classList.add("hidden");
-        stats.innerHTML = `It took you ${minutes} minute(s) and ${seconds} seconds to win the game in ${moves} moves. You've earned ${starCount} star(s).`
+        stats.innerHTML = `It took you ${minutes} minute(s) and ${seconds} seconds to win the game in ${moves} moves. You've earned ${starCount} star(s).`;
         gameOverModal.classList.remove("hidden");
     }
 }
@@ -237,20 +236,20 @@ function gameOver() {
 //'LET'S PLAY' button
 startBtn.addEventListener("click", function () {
     addCards(cardDeck, symbols);
-    clickHandler();
+    addListeners();
     welcomeModal.classList.add("hidden");
     mainGame.classList.toggle("hidden");
     startTimer();
-})
+});
 
 //'RESTART' button
 restartBtn.addEventListener("click", function () {
     newGame();
-})
+});
 
 //'YES!' button
 newGameBtn.addEventListener("click", function () {
     gameOverModal.classList.toggle("hidden");
     mainGame.classList.toggle("hidden");
     newGame();
-})
+});

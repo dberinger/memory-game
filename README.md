@@ -6,9 +6,13 @@ Memory Game is a project created for Front-End Web Developer Nanodegree Program 
 
 It's a classic memory game. The deck consists of 16 cards. In order to win all pairs must be matched. Gameplay time is measured and so are moves. There's also star rating, dependent on player's performance. 
 
-## Meta
+## Dependencies
 
-[https://github.com/dberinger](https://github.com/dberinger)
+Third-party content used in project:
+* Roboto and Roboto Slab fonts from Google Fonts <https://fonts.googleapis.com/css?family=Roboto%7CRoboto+Slab>
+* Font Awesome icons from <https://fontawesome.com/>
+* JS timer based on Daniel Hug's JS Fiddle <https://jsfiddle.net/Daniel_Hug/pvk6p/>
+* Shuffle function from StackOverflow <http://stackoverflow.com/a/2450976>
 
 ## Contributing
 
